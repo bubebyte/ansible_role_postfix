@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+{% if postfix_smtpd_restrictions is defined %}
+# smtpd restrictions
+{% for restriction_category in postfix_smtpd_restrictions %}
+{% if postfix_smtpd_restrictions[restriction_category]|length > 0 %}
+smtpd_{{ restriction_category }}_restrictions =
+{% for restriction in postfix_smtpd_restrictions[restriction_category] %}
+{% if loop.index == postfix_smtpd_restrictions[restriction_category]|length %}
+  {{ restriction }}
+{% else %}
+  {{ restriction }},
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}

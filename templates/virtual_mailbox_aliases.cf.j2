@@ -1,0 +1,6 @@
+user = {{ postfix_sql_backend_user }}
+password = {{ postfix_sql_backend_password }}
+hosts = {{ postfix_sql_backend_hostname }}
+dbname = {{ postfix_sql_backend_databasename }}
+table  = aliases
+query = {{ postfix_virtual_mailbox_aliases_query }}
