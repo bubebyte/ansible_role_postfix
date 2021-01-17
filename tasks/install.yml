@@ -1,0 +1,46 @@
+---
+- name: Install postfix
+  ansible.builtin.package:
+    name: "postfix"
+    state: present
+
+- name: Add MySQL map support package to extra packages
+  set_fact:
+    postfix_extra_packages: "{{ postfix_extra_packages + ['postfix-mysql'] }}"
+  when:
+    - postfix_mysql_map_support|bool
+
+- name: Add CDB map support package to extra packages
+  set_fact:
+    postfix_extra_packages: "{{ postfix_extra_packages + ['postfix-cdb'] }}"
+  when:
+    - postfix_cdb_map_support|bool
+
+- name: Add LDAP map support package to extra packages
+  set_fact:
+    postfix_extra_packages: "{{ postfix_extra_packages + ['postfix-ldap'] }}"
+  when:
+    - postfix_ldap_map_support|bool
+
+- name: Add PCRE map support package to extra packages
+  set_fact:
+    postfix_extra_packages: "{{ postfix_extra_packages + ['postfix-pcre'] }}"
+  when:
+    - postfix_pcre_map_support|bool
+
+- name: Add PostgreSQL map support package to extra packages
+  set_fact:
+    postfix_extra_packages: "{{ postfix_extra_packages + ['postfix-pgsql'] }}"
+  when:
+    - postfix_pgsql_map_support|bool
+
+- name: Add SQLite map support package to extra packages
+  set_fact:
+    postfix_extra_packages: "{{ postfix_extra_packages + ['postfix-sqlite'] }}"
+  when:
+    - postfix_sqlite_map_support|bool
+
+- name: Install extra packages
+  ansible.builtin.package:
+    name: "{{ postfix_extra_packages }}"
+    state: present
