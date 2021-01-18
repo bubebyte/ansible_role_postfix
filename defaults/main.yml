@@ -15,6 +15,14 @@ postfix_virtual_domains_query: "SELECT DISTINCT domain FROM users WHERE active =
 postfix_virtual_mailbox_aliases_query: "SELECT DISTINCT domain FROM users WHERE active = 'Y' AND domain = '%s';"
 postfix_virtual_mailbox_recipients_query: "SELECT home FROM users WHERE active = 'Y' AND concat(username,'@', domain) = '%s';"
 
+postfix_configuration: []
+
+postfix_mysql_map_configuration:
+  mysql_configuration:
+    virtual_mailbox_domains: "mysql:/etc/postfix/sql/virtual_domains.cf"
+    virtual_mailbox_maps: "mysql:/etc/postfix/sql/virtual_mailbox_recipients.cf"
+    virtual_alias_maps: "mysql:/etc/postfix/sql/virtual_mailbox_aliases.cf"
+
 postfix_smtpd_restrictions:
   helo: []
   recipient: []
