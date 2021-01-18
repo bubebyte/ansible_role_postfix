@@ -1,4 +1,10 @@
 ---
+- name: Add MySQL map config
+  ansible.builtin.set_fact:
+    postfix_configuration: "{{ postfix_configuration | combine(postfix_mysql_map_configuration) }}"
+  when:
+    - postfix_mysql_map_support|bool
+
 - name: Place main.cf
   ansible.builtin.template:
     src: main.cf.j2
