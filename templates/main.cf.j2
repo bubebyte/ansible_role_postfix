@@ -9,7 +9,7 @@
 {% endfor %}
 {% endif %}
 
-{% if postfix_smtpd_restrictions is defined %}
+{% if postfix_smtpd_restrictions|length > 0 %}
 # smtpd restrictions
 {% for restriction_category in postfix_smtpd_restrictions %}
 {% if postfix_smtpd_restrictions[restriction_category]|length > 0 %}
