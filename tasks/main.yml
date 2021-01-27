@@ -1,9 +1,9 @@
 ---
 - name: Inlcude tasks to install postfix
-  ansible.builtin.include_tasks: install.yml
+  include_tasks: install.yml
 
 - name: Inlcude tasks to configure postfix
-  ansible.builtin.include_tasks: configure.yml
+  include_tasks: configure.yml
 
 - name: Enable and start postfix service
   ansible.builtin.service:
