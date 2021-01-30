@@ -5,6 +5,49 @@
   when:
     - postfix_mysql_map_support|bool
 
+- name: Create directory for MySQL mapping config
+  file:
+    path: /etc/postfix/mysql_map
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  when:
+    - postfix_mysql_map_support|bool
+
+- name: Place virtual_mailbox_aliases.cf
+  ansible.builtin.template:
+    src: mysql_virtual_mailbox_aliases.cf.j2
+    dest: /etc/postfix/mysql_map/virtual_mailbox_aliases.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart postfix service
+  when:
+    - postfix_mysql_map_support|bool
+
+- name: Place virtual_domains.cf
+  ansible.builtin.template:
+    src: mysql_virtual_domains.cf.j2
+    dest: /etc/postfix/mysql_map/virtual_domains.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart postfix service
+  when:
+    - postfix_mysql_map_support|bool
+
+- name: Place virtual_mailbox_recipients.cf
+  ansible.builtin.template:
+    src: mysql_virtual_mailbox_recipients.cf.j2
+    dest: /etc/postfix/mysql_map/virtual_mailbox_recipients.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart postfix service
+  when:
+    - postfix_mysql_map_support|bool
+
 - name: Place main.cf
   ansible.builtin.template:
     src: main.cf.j2
