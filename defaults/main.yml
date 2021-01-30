@@ -12,7 +12,7 @@ postfix_sql_backend_databasename: maildb
 postfix_sql_backend_user: maildbusr
 postfix_sql_backend_password: "ChangeMePLZ!"
 postfix_virtual_domains_query: "SELECT DISTINCT domain FROM users WHERE active = 'Y' AND domain = '%s';"
-postfix_virtual_mailbox_aliases_query: "SELECT DISTINCT domain FROM users WHERE active = 'Y' AND domain = '%s';"
+postfix_virtual_mailbox_aliases_query: "SELECT target FROM aliases WHERE alias = '%s';"
 postfix_virtual_mailbox_recipients_query: "SELECT home FROM users WHERE active = 'Y' AND concat(username,'@', domain) = '%s';"
 
 postfix_configuration:
@@ -50,9 +50,9 @@ postfix_configuration:
 
 postfix_mysql_map_configuration:
   mysql_configuration:
-    virtual_mailbox_domains: "mysql:/etc/postfix/sql/virtual_domains.cf"
-    virtual_mailbox_maps: "mysql:/etc/postfix/sql/virtual_mailbox_recipients.cf"
-    virtual_alias_maps: "mysql:/etc/postfix/sql/virtual_mailbox_aliases.cf"
+    virtual_mailbox_domains: "mysql:/etc/postfix/mysql_map/virtual_domains.cf"
+    virtual_mailbox_maps: "mysql:/etc/postfix/mysql_map/virtual_mailbox_recipients.cf"
+    virtual_alias_maps: "mysql:/etc/postfix/mysql_map/virtual_mailbox_aliases.cf"
 
 postfix_smtpd_restrictions:
   helo: []
