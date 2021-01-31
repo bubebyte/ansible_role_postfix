@@ -11,12 +11,10 @@
 #               (yes)   (yes)   (no)    (never) (100)
 # ==========================================================================
 {% for service in postfix_master_configuration %}
-{% if postfix_master_configuration[service] is mapping %}
-{{ service }} {% if postfix_master_configuration[service].type is defined %}{{ postfix_master_configuration[service].type }}{% else %}-{% endif %} {% if postfix_master_configuration[service].private is defined %}{{ postfix_master_configuration[service].private }}{% else %}-{% endif %} {% if postfix_master_configuration[service].unpriv is defined %}{{ postfix_master_configuration[service].unpriv }}{% else %}-{% endif %} {% if postfix_master_configuration[service].chroot is defined %}{{ postfix_master_configuration[service].chroot }}{% else %}-{% endif %} {% if postfix_master_configuration[service].wakeup is defined %}{{ postfix_master_configuration[service].wakeup }}{% else %}-{% endif %} {% if postfix_master_configuration[service].maxproc is defined %}{{ postfix_master_configuration[service].maxproc }}{% else %}-{% endif %} {% if postfix_master_configuration[service].command is defined %}{{ postfix_master_configuration[service].command }}{% else %}-{% endif %}{{- '\n' -}}
-{% if postfix_master_configuration[service].argument_lines is defined %}
-{% for argument_line in postfix_master_configuration[service].argument_lines %}
+{{ service.name }} {% if service.type is defined %}{{ service.type }}{% else %}-{% endif %} {% if service.private is defined %}{{ service.private }}{% else %}-{% endif %} {% if service.unpriv is defined %}{{ service.unpriv }}{% else %}-{% endif %} {% if service.chroot is defined %}{{ service.chroot }}{% else %}-{% endif %} {% if service.wakeup is defined %}{{ service.wakeup }}{% else %}-{% endif %} {% if service.maxproc is defined %}{{ service.maxproc }}{% else %}-{% endif %} {% if service.command is defined %}{{ service.command }}{% else %}-{% endif %}{{- '\n' -}}
+{% if service.argument_lines is defined %}
+{% for argument_line in service.argument_lines %}
   {{ argument_line }}
 {% endfor %}
-{% endif %}
 {% endif %}
 {% endfor %}
