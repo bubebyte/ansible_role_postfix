@@ -48,6 +48,8 @@ postfix_configuration:
     meta_directory: /etc/postfix
     shlib_directory: /usr/lib64/postfix
 
+postfix_master_configuration: []
+
 postfix_mysql_map_configuration:
   mysql_configuration:
     virtual_mailbox_domains: "mysql:/etc/postfix/mysql_map/virtual_domains.cf"

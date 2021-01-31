@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+#
+# Postfix master process configuration file.  For details on the format
+# of the file, see the master(5) manual page (command: "man 5 master" or
+# on-line: http://www.postfix.org/master.5.html).
+#
+# Do not forget to execute "postfix reload" after editing this file.
+#
+# ==========================================================================
+# service type  private unpriv  chroot  wakeup  maxproc command + args
+#               (yes)   (yes)   (no)    (never) (100)
+# ==========================================================================
+{% for service in postfix_master_configuration %}
+{% if postfix_master_configuration[service] is mapping %}
+{{ service }} {% if postfix_master_configuration[service].type is defined %}{{ postfix_master_configuration[service].type }}{% else %}-{% endif %} {% if postfix_master_configuration[service].private is defined %}{{ postfix_master_configuration[service].private }}{% else %}-{% endif %} {% if postfix_master_configuration[service].unpriv is defined %}{{ postfix_master_configuration[service].unpriv }}{% else %}-{% endif %} {% if postfix_master_configuration[service].chroot is defined %}{{ postfix_master_configuration[service].chroot }}{% else %}-{% endif %} {% if postfix_master_configuration[service].wakeup is defined %}{{ postfix_master_configuration[service].wakeup }}{% else %}-{% endif %} {% if postfix_master_configuration[service].maxproc is defined %}{{ postfix_master_configuration[service].maxproc }}{% else %}-{% endif %} {% if postfix_master_configuration[service].command is defined %}{{ postfix_master_configuration[service].command }}{% else %}-{% endif %}{{- '\n' -}}
+{% if postfix_master_configuration[service].argument_lines is defined %}
+{% for argument_line in postfix_master_configuration[service].argument_lines %}
+  {{ argument_line }}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endfor %}
