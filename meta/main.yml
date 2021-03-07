@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  role_name: postfix
+  author: Armin Bube
+  description: "Ansible role to install and configure Postfix on CentOS."
+
+  license: MIT
+
+  min_ansible_version: "2.10"
+
+  github_branch: main
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+
+  galaxy_tags:
+    - postfix
+    - mailserver
+    - mail
+    - web
+    - networking
+
+dependencies: []
