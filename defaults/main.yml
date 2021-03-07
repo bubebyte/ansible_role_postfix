@@ -35,7 +35,7 @@ postfix_configuration:
     newaliases_path: /usr/bin/newaliases.postfix
     mailq_path: /usr/bin/mailq.postfix
     setgid_group: postdrop
-    html_directory: no
+    html_directory: "no"
     manpage_directory: /usr/share/man
     sample_directory: /usr/share/doc/postfix/samples
     readme_directory: /usr/share/doc/postfix/README_FILES
@@ -49,35 +49,35 @@ postfix_configuration:
     shlib_directory: /usr/lib64/postfix
 
 postfix_master_configuration:
-  - { name: smtp, type: inet, private: n, chroot: n, command: smtpd }
-  - { name: pickup, type: unix, private: n, chroot: n, wakeup: 60, maxproc: 1, command: pickup }
-  - { name: cleanup, type: unix, private: n, chroot: n, maxproc: 0, command: cleanup }
-  - { name: qmgr, type: unix, private: n, chroot: n, wakeup: 300, maxproc: 1, command: qmgr }
-  - { name: tlsmgr, type: unix, chroot: n, wakeup: 1000?, maxproc: 1, command: tlsmgr }
-  - { name: rewrite, type: unix, chroot: n, command: trivial-rewrite }
-  - { name: bounce, type: unix, chroot: n, maxproc: 0, command: bounce }
-  - { name: defer, type: unix, chroot: n, maxproc: 0, command: bounce }
-  - { name: trace, type: unix, chroot: n, maxproc: 0, command: bounce }
-  - { name: verify, type: unix, chroot: n, maxproc: 1, command: verify }
-  - { name: flush, type: unix, private: n, chroot: n, wakeup: 1000?, maxproc: 0, command: flush }
-  - { name: proxymap, type: unix, chroot: n, command: proxymap }
-  - { name: proxywrite, type: unix, chroot: n, maxprox: 1, command: proxymap }
-  - { name: smtp, type: unix, chroot: n, command: smtp }
+  - {name: smtp, type: inet, private: n, chroot: n, command: smtpd}
+  - {name: pickup, type: unix, private: n, chroot: n, wakeup: 60, maxproc: 1, command: pickup}
+  - {name: cleanup, type: unix, private: n, chroot: n, maxproc: 0, command: cleanup}
+  - {name: qmgr, type: unix, private: n, chroot: n, wakeup: 300, maxproc: 1, command: qmgr}
+  - {name: tlsmgr, type: unix, chroot: n, wakeup: '1000?', maxproc: 1, command: tlsmgr}
+  - {name: rewrite, type: unix, chroot: n, command: trivial-rewrite}
+  - {name: bounce, type: unix, chroot: n, maxproc: 0, command: bounce}
+  - {name: defer, type: unix, chroot: n, maxproc: 0, command: bounce}
+  - {name: trace, type: unix, chroot: n, maxproc: 0, command: bounce}
+  - {name: verify, type: unix, chroot: n, maxproc: 1, command: verify}
+  - {name: flush, type: unix, private: n, chroot: n, wakeup: '1000?', maxproc: 0, command: flush}
+  - {name: proxymap, type: unix, chroot: n, command: proxymap}
+  - {name: proxywrite, type: unix, chroot: n, maxprox: 1, command: proxymap}
+  - {name: smtp, type: unix, chroot: n, command: smtp}
   - name: relay
     type: unix
     chroot: n
     command: smtp
     argument_lines:
       - '-o syslog_name=postfix/$service_name'
-  - { name: showq, type: unix, private: n, chroot: n, command: showq }
-  - { name: error, type: unix, chroot: n, command: error }
-  - { name: retry, type: unix, chroot: n, command: error }
-  - { name: discard, type: unix, chroot: n, command: discard }
-  - { name: local, type: unix, unpriv: n, chroot: n, command: local }
-  - { name: virtual, type: unix, unpriv: n, chroot: n, command: virtual }
-  - { name: lmtp, type: unix, chroot: n, command: lmtp }
-  - { name: anvil, type: unix, chroot: n, maxprox: 1, command: anvil }
-  - { name: scache, type: unix, chroot: n, maxprox: 1, command: scache }
+  - {name: showq, type: unix, private: n, chroot: n, command: showq}
+  - {name: error, type: unix, chroot: n, command: error}
+  - {name: retry, type: unix, chroot: n, command: error}
+  - {name: discard, type: unix, chroot: n, command: discard}
+  - {name: local, type: unix, unpriv: n, chroot: n, command: local}
+  - {name: virtual, type: unix, unpriv: n, chroot: n, command: virtual}
+  - {name: lmtp, type: unix, chroot: n, command: lmtp}
+  - {name: anvil, type: unix, chroot: n, maxprox: 1, command: anvil}
+  - {name: scache, type: unix, chroot: n, maxprox: 1, command: scache}
 
 postfix_mysql_map_configuration:
   mysql_configuration:
