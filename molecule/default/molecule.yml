@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint -d "{extends: default, rules: {line-length: {max: 120, level: warning}}, ignore: .github/workflows/molecule.yml}" .
+  ansible-lint
+platforms:
+  - name: "postfix-${MOLECULE_DISTRO:-centos8}-${BUILD_NUMBER:-0}"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:${TAG:-latest}"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    tty: true
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+verifier:
+  name: ansible

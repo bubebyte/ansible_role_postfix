@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Gather service facts
+      service_facts:
+
+    - debug:
+        var: ansible_facts.services["postfix.service"]
+
+    - name: Check postfix service state
+      fail:
+        msg: The service postfix is not running.
+      when: ansible_facts.services["postfix.service"].state != "running"
+
+    - name: Check postfix service state
+      fail:
+        msg: The service postfix is not enabled.
+      when: ansible_facts.services["postfix.service"].status != "enabled"
