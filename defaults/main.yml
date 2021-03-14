@@ -91,3 +91,4 @@ postfix_smtpd_restrictions:
   sender: []
   client: []
   data: []
+  relay: []

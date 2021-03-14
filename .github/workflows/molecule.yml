@@ -26,6 +26,8 @@ jobs:
         image:
           - docker-centos7-ansible
           - docker-centos8-ansible
+          - docker-ubuntu1804-ansible
+          - docker-ubuntu2004-ansible
     steps:
       - name: checkout
         uses: actions/checkout@v2
