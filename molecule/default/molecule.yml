@@ -12,7 +12,7 @@ lint: |
 platforms:
   - name: "postfix-${image:-docker-centos8-ansible}"
     image: "${namespace:-geerlingguy}/${image:-docker-centos8-ansible}:${tag:-latest}"
-    command: ${command:-""}
+    command: ${docker_command:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
