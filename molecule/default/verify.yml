@@ -11,10 +11,12 @@
     - name: Gather listening ports
       community.general.listen_ports_facts:
 
-    - debug:
+    - name: "DEBUG: Print status of postfix.service"
+      debug:
         var: ansible_facts.services["postfix.service"]
 
-    - debug:
+    - name: "DEBUG: Print ansible_facts.tcp_listen"
+      debug:
         var: ansible_facts.tcp_listen
 
     - name: "Create empty list to store master listen ports"
