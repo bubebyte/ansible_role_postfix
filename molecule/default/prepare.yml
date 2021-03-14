@@ -11,5 +11,5 @@
       when: ansible_os_family == "Debian"
 
     - name: Install "net-tools" package
-      apt:
+      package:
         name: net-tools
