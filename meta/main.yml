@@ -3,7 +3,7 @@ galaxy_info:
   namespace: bubebyte
   role_name: postfix
   author: Armin Bube
-  description: "Ansible role to install and configure."
+  description: "Ansible role to install and configure postfix."
 
   license: MIT
 
