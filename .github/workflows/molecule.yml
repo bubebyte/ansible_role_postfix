@@ -20,14 +20,15 @@ jobs:
   test:
     needs:
       - lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         image:
-          - docker-centos7-ansible
           - docker-centos8-ansible
-          - docker-ubuntu1804-ansible
-          - docker-ubuntu2004-ansible
+          - docker-rockylinux9-ansible
+          - docker-rockylinux10-ansible
+          - docker-ubuntu2204-ansible
+          - docker-ubuntu2404-ansible
     steps:
       - name: checkout
         uses: actions/checkout@v2
