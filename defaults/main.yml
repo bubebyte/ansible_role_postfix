@@ -1,11 +1,6 @@
 ---
 postfix_extra_packages: []
-postfix_mysql_map_support: false
-postfix_cdb_map_support: false
-postfix_ldap_map_support: false
-postfix_pcre_map_support: false
-postfix_pgsql_map_support: false
-postfix_sqlite_map_support: false
+postfix_sql_backend: mysql
 
 postfix_sql_backend_hostname: localhost
 postfix_sql_backend_databasename: maildb
@@ -79,11 +74,11 @@ postfix_master_configuration:
   - {name: anvil, type: unix, chroot: n, maxprox: 1, command: anvil}
   - {name: scache, type: unix, chroot: n, maxprox: 1, command: scache}
 
-postfix_mysql_map_configuration:
-  mysql_configuration:
-    virtual_mailbox_domains: "mysql:/etc/postfix/mysql_map/virtual_domains.cf"
-    virtual_mailbox_maps: "mysql:/etc/postfix/mysql_map/virtual_mailbox_recipients.cf"
-    virtual_alias_maps: "mysql:/etc/postfix/mysql_map/virtual_mailbox_aliases.cf"
+postfix_sql_map_configuration:
+  "SQL configuration":
+    virtual_mailbox_domains: "{{ postfix_sql_backend }}:/etc/postfix/sql_map/virtual_domains.cf"
+    virtual_mailbox_maps: "{{ postfix_sql_backend }}:/etc/postfix/sql_map/virtual_mailbox_recipients.cf"
+    virtual_alias_maps: "{{ postfix_sql_backend }}:/etc/postfix/sql_map/virtual_mailbox_aliases.cf"
 
 postfix_smtpd_restrictions:
   helo: []

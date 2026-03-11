@@ -4,7 +4,7 @@
 
 # {{ config_category }}
 {% for config_key, config_value in postfix_configuration[config_category].items() %}
-{{ config_key }} = {{ config_value }}
+{{ config_key }} = {{ config_value }}
 {% endfor %}
 {% endfor %}
 {% endif %}

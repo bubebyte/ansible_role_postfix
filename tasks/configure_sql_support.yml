@@ -1,0 +1,40 @@
+---
+- name: Add SQL map config
+  ansible.builtin.set_fact:
+    postfix_configuration: "{{ postfix_configuration | combine(postfix_sql_map_configuration) }}"
+
+- name: Create directory SQL mapping config
+  file:
+    path: /etc/postfix/sql_map
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Place virtual_mailbox_aliases.cf
+  ansible.builtin.template:
+    src: sql_virtual_mailbox_aliases.cf.j2
+    dest: /etc/postfix/sql_map/virtual_mailbox_aliases.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart postfix service
+
+- name: Place virtual_domains.cf
+  ansible.builtin.template:
+    src: sql_virtual_domains.cf.j2
+    dest: /etc/postfix/sql_map/virtual_domains.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart postfix service
+
+- name: Place virtual_mailbox_recipients.cf
+  ansible.builtin.template:
+    src: sql_virtual_mailbox_recipients.cf.j2
+    dest: /etc/postfix/sql_map/virtual_mailbox_recipients.cf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart postfix service
+
