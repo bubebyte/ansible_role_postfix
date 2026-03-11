@@ -14,7 +14,7 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - name: molecule
-        uses: robertdebock/molecule-action@2.6.16
+        uses: robertdebock/molecule-action@6.0.1
         with:
           command: lint
   test:
@@ -35,7 +35,7 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - name: molecule
-        uses: robertdebock/molecule-action@2.6.16
+        uses: robertdebock/molecule-action@6.0.1
         with:
           namespace: geerlingguy
           image: "${{ matrix.image }}"
