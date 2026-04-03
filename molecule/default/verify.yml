@@ -6,17 +6,17 @@
 
   tasks:
     - name: Gather service facts
-      service_facts:
+      ansible.builtin.service_facts:
 
     - name: Gather listening ports
       community.general.listen_ports_facts:
 
     - name: "DEBUG: Print status of postfix.service"
-      debug:
+      ansible.builtin.debug:
         var: ansible_facts.services["postfix.service"]
 
     - name: "DEBUG: Print ansible_facts.tcp_listen"
-      debug:
+      ansible.builtin.debug:
         var: ansible_facts.tcp_listen
 
     - name: "Create empty list to store master listen ports"
@@ -29,19 +29,19 @@
       loop: "{{ ansible_facts.tcp_listen | select('search', 'master') | map(attribute='port') | unique | list }}"
 
     - name: Fail if Postfix is not listening on a tcp port
-      fail:
+      ansible.builtin.fail:
         msg: Postfix is not listening on a tcp port
       when: tcp_listen_ports | length == 0
 
     - name: Additional checks of RHEL based systems
       block:
         - name: Check postfix service state
-          fail:
+          ansible.builtin.fail:
             msg: The service postfix is not running.
           when: ansible_facts.services["postfix.service"].state != "running"
 
         - name: Check postfix service state
-          fail:
+          ansible.builtin.fail:
             msg: The service postfix is not enabled.
           when: ansible_facts.services["postfix.service"].status != "enabled"
       when: ansible_facts.os_family == "RedHat"

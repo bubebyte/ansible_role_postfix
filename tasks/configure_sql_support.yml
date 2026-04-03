@@ -4,7 +4,7 @@
     postfix_configuration: "{{ postfix_configuration | combine(postfix_sql_map_configuration) }}"
 
 - name: Create directory SQL mapping config
-  file:
+  ansible.builtin.file:
     path: /etc/postfix/sql_map
     state: directory
     owner: root
@@ -27,7 +27,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Restart postfix service
+  notify: "postfix config changed"
 
 - name: Place virtual_mailbox_recipients.cf
   ansible.builtin.template:
@@ -36,4 +36,4 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Restart postfix service
+  notify: "postfix config changed"

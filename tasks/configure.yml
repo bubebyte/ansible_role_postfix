@@ -1,7 +1,7 @@
 ---
 - name: Inlcude tasks to configure SQL support
-  include_tasks: configure_sql_support.yml
-  when: postfix_sql_backend == "mysql" or postfix_sql_backend == "pgsql"
+  ansible.builtin.include_tasks: configure_sql_support.yml
+  when: postfix_sql_backend in ['mysql', 'pgsql']
 
 - name: Place main.cf
   ansible.builtin.template:
@@ -10,7 +10,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Restart postfix service
+  notify: "postfix config changed"
 
 - name: Place master.cf
   ansible.builtin.template:
@@ -19,4 +19,4 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Restart postfix service
+  notify: "postfix config changed"

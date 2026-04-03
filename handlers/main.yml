@@ -1,5 +1,6 @@
 ---
 - name: Restart postfix service
-  service:
+  ansible.builtin.service:
     name: postfix
     state: restarted
+  listen: "postfix config changed"
