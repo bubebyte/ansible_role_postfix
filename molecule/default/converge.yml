@@ -4,9 +4,6 @@
   become: true
   gather_facts: true
 
-  vars:
-    ansible_become_method: su
-
   pre_tasks:
     - name: Include variables for test of RHEL based OS
       ansible.builtin.include_vars:
