@@ -80,3 +80,4 @@ jobs:
           image: ${{ matrix.distro.image }}
           namespace: ${{ matrix.distro.namespace }}
           tag: ${{ matrix.distro.tag }}
+          docker_command: "/sbin/init"

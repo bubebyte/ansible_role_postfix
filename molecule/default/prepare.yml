@@ -2,7 +2,7 @@
 - name: Prepare
   hosts: all
   become: true
-  gather_facts: false
+  gather_facts: true
 
   tasks:
     - name: Update apt cache
