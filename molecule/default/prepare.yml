@@ -4,6 +4,9 @@
   become: true
   gather_facts: true
 
+  vars:
+    ansible_become_method: su
+
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
