@@ -24,8 +24,6 @@ provisioner:
   name: ansible
   inventory:
     host_vars:
-      postfix-docker-centos8-ansible:
-        ansible_become_method: su
       postfix-docker-rockylinux9-ansible:
         ansible_become_method: su
       postfix-docker-rockylinux10-ansible:

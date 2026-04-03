@@ -7,19 +7,17 @@ galaxy_info:
 
   license: MIT
 
-  min_ansible_version: "2.10"
-
   github_branch: main
 
   platforms:
     - name: EL
       versions:
-        - 8
         - 9
+        - 10
     - name: Ubuntu
       versions:
-        - bionic
-        - focal
+        - jammy
+        - noble
 
   galaxy_tags:
     - postfix
